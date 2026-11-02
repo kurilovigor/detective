@@ -489,3 +489,7 @@ $RECYCLE.BIN/
 *-log.db
 *.litedb
 
+/.claude
+/.github
+/.repowise
+/.vscode
