@@ -1,0 +1,141 @@
+﻿<ui:FluentWindow x:Class="Detective.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:local="clr-namespace:Detective"
+        xmlns:vm="clr-namespace:Detective.ViewModels"                 
+        mc:Ignorable="d"
+        Title="DETECTive" Height="450" Width="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <ui:TitleBar 
+                Grid.Row="0"
+                HorizontalContentAlignment="Stretch">
+            <ui:TitleBar.CenterContent>
+                <Grid
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Menu
+                        Grid.Column="0"
+                        HorizontalAlignment="Left">
+                        <ui:MenuItem Command="{Binding HomeCommand}">
+                            <ui:MenuItem.Icon>
+                                <ui:SymbolIcon Symbol="Home20" FontSize="20" Foreground="ForestGreen" />
+                            </ui:MenuItem.Icon>
+                        </ui:MenuItem>
+                        <ui:MenuItem Header="_File">
+                            <ui:MenuItem Header="New..." 
+                                         Command="{Binding NewCommand}"
+                                         InputGestureText="Ctrl+N">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Document20"/>
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <ui:MenuItem Command="{Binding OpenCommand}" Header="Open..." InputGestureText="Ctrl+O">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="FolderOpen20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <Separator/>
+                            <ui:MenuItem Header="Recent Files" ItemsSource="{Binding RecentFileCommands.Keys}" 
+                                        PreviewMouseLeftButtonUp="RecentFile_PreviewMouseLeftButtonUp">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="History20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <Separator/>
+                            <ui:MenuItem Header="Export">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="ArrowExportLtr20" />
+                                </ui:MenuItem.Icon>
+                                <ui:MenuItem Header="To YOLO..." Command="{Binding ExportToYoloCommand}" />
+                            </ui:MenuItem>
+                            <Separator/>
+                            <ui:MenuItem Command="{Binding SettingsCommand}" Header="Settings..." >
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Settings20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <Separator/>
+                            <ui:MenuItem Command="{Binding ExitCommand}" Header="Exit" >
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="ArrowExit20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                        </ui:MenuItem>
+                        <ui:MenuItem Header="_Edit">
+                            <ui:MenuItem Header="Undo" Command="{Binding UndoCommand}" InputGestureText="Ctrl+Z">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="ArrowUndo20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <ui:MenuItem Header="Redo" Command="{Binding RedoCommand}" InputGestureText="Ctrl+Y">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="ArrowRedo20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <Separator />
+                            <ui:MenuItem Header="Delete Label" Command="{Binding DeleteLabelCommand}" InputGestureText="Delete">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Delete20"/>
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                        </ui:MenuItem>
+                        <ui:MenuItem Header="_Images">
+                            <ui:MenuItem Header="Add Files..." Command="{Binding AddFilesCommand}">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="ImageAdd20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <ui:MenuItem Header="Add Folder..." Command="{Binding AddFolderCommand}">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="FolderAdd20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <Separator/>
+                            <ui:MenuItem Header="Delete file" Command="{Binding DeleteFileCommand}">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Delete20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <ui:MenuItem Header="Delete All" Command="{Binding DeleteAllCommand}"/>
+                            <Separator/>
+                            <ui:MenuItem Header="Prior..." Command="{Binding SelectPriorCommand}">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Previous20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                            <ui:MenuItem Header="Next..." Command="{Binding SelectNextCommand}">
+                                <ui:MenuItem.Icon>
+                                    <ui:SymbolIcon Symbol="Next20" />
+                                </ui:MenuItem.Icon>
+                            </ui:MenuItem>
+                        </ui:MenuItem>
+                    </Menu>
+                    <ui:TextBlock
+                        Grid.Column="1"
+                        x:Name="Title"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontTypography="BodyStrong"
+                        Text="{Binding TitleText}">DETECTive</ui:TextBlock>
+                </Grid>
+            </ui:TitleBar.CenterContent>
+        </ui:TitleBar>
+        <!-- Client Area [1, 0] -->
+        <Frame 
+            x:Name="MainFrame" 
+            Grid.Row="1" />
+    </Grid>
+</ui:FluentWindow>

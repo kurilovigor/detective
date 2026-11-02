@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Detective": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}

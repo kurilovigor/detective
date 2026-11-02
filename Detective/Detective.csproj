@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+      <UseWPF>true</UseWPF>
+      <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiteDB" Version="6.0.0-prerelease.81" />
+    <PackageReference Include="SharpYaml" Version="3.13.1" />
+    <PackageReference Include="WPF-UI" Version="4.3.0" />
+  </ItemGroup>
+
+  <!-- Include local font as a WPF resource when present. The font file should be placed in Fonts/Segoe Fluent Icons.ttf -->
+  <ItemGroup>
+    <Resource Include="Fonts\Segoe Fluent Icons.ttf" Condition="Exists('Fonts\\Segoe Fluent Icons.ttf')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\DetectiveLogo240.png" />
+  </ItemGroup>
+</Project>

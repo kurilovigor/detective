@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Detective.Views.Controls.FileList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Detective.Views.Controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+             xmlns:models="clr-namespace:Detective.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:AutoSuggestBox
+                x:Name="SearchTextBox"
+                Grid.Column="0"
+                Icon="{ui:SymbolIcon Search24}"
+                PlaceholderText="File name..."
+                Margin="5,5,5,5"/>
+            <ui:Button
+                x:Name="AddFileButton"
+                Grid.Column="1"
+                Margin="5,5,5,5">
+                <ui:SymbolIcon Symbol="ImageAdd24" />
+            </ui:Button>
+            <ui:Button
+                x:Name="AddFolderButton"
+                Grid.Column="2"
+                Margin="5,5,5,5">
+                <ui:SymbolIcon Symbol="FolderAdd24" />
+            </ui:Button>
+        </Grid>
+        <ui:ListView 
+            Grid.Row="1"
+            x:Name="FilesListView"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.CanContentScroll="True"
+            ItemsSource="{Binding Files, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
+            SelectedIndex="{Binding SelectedIndex, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
+            SelectionMode="Single">
+            <ui:ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:FileItem}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:InfoBadge
+                            Grid.Column="0"
+                            Value="{Binding DetectionCount}"
+                            Severity="{Binding DetectionCountSeverity}"
+                            />
+                        <ui:TextBlock 
+                            Grid.Column="1"
+                            Text="{Binding Name}" />
+                        <ui:Button
+                            Grid.Column="2"
+                            Margin="4,0,0,0"
+                            Padding="6"
+                            Click="DeleteItemButton_Click">
+                            <ui:SymbolIcon Symbol="Delete12" />
+                        </ui:Button>
+                    </Grid>
+                </DataTemplate>
+            </ui:ListView.ItemTemplate>
+        </ui:ListView>
+    </Grid>
+</UserControl>

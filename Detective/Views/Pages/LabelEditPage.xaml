@@ -1,0 +1,122 @@
+﻿<Page x:Class="Detective.Views.Pages.LabelEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Detective.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+      xmlns:controls="clr-namespace:Detective.Views.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LabelEditorPage">
+
+    <Grid x:Name="RootGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn" Width="250" MinWidth="100"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid
+            Grid.Column="0"
+            Margin="0,4,0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MaxHeight="400" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Labels -->
+            <Border
+                Background="{ui:ThemeResource ControlFillColorDefaultBrush}"
+                CornerRadius="12"
+                Grid.Row="0"
+                x:Name="LabelsContainer">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ui:Button 
+                        Grid.Row="0"
+                        CornerRadius="12"
+                        BorderThickness="0"
+                        Appearance="Secondary"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Click="LabelsHeaderButton_Click">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="ChevronDown20" x:Name="LabelsIcon"/>
+                        </ui:Button.Icon>
+                        Labels
+                    </ui:Button>
+                    <controls:LabelList 
+                        Grid.Row="1"
+                        Margin="0,0,0,8"
+                        x:Name="Labels"
+                        BorderThickness="0"
+                        Background="Transparent"/>
+                </Grid>
+            </Border>
+            <!-- Files -->
+            <Border
+                Background="{ui:ThemeResource ControlFillColorDefaultBrush}"
+                Grid.Row="2"
+                CornerRadius="12"
+                x:Name ="FilesContainer">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ui:Button 
+                        Grid.Row="0"
+                        CornerRadius="12"
+                        BorderThickness="0"
+                        Appearance="Secondary"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Click="FilesHeaderButton_Click">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="ChevronDown20" x:Name="FilesIcon"/>
+                        </ui:Button.Icon>
+                        Files
+                    </ui:Button>
+                    <controls:FileList 
+                        Grid.Row="1"
+                        Margin="0,0,0,8"
+                        x:Name="Files"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <GridSplitter 
+            Grid.Column="1" 
+            Width="8" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" 
+            Background="{ui:ThemeResource ApplicationBackgroundBrush}" />
+        <Grid
+            Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- Editor -->
+            <Border
+                Grid.Row="0"
+                CornerRadius="12"
+                Margin="0,4,8,4"
+                Background="{ui:ThemeResource ControlFillColorDefaultBrush}">
+                <controls:LabelEditor
+                    x:Name="Editor"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="8,8,8,8"
+                    Background="Transparent"/>
+            </Border>
+            <!-- Status Bar -->
+            <ui:TextBlock
+                x:Name="SelectedRectInfo"
+                Appearance="Secondary"
+                Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</Page>

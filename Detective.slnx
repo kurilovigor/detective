@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="TODO.txt" />
+  </Folder>
+  <Project Path="Detective/Detective.csproj" />
+</Solution>
