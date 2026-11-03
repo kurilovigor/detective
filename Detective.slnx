@@ -1,7 +1,5 @@
 <Solution>
-  <Folder Name="/Solution Items/">
-    <File Path="TASK-01.md" />
-    <File Path="TODO.txt" />
-  </Folder>
+  <Folder Name="/Solution Items/" />
   <Project Path="Detective/Detective.csproj" />
+  <Project Path="Detective.Tests/Detective.Tests.csproj" />
 </Solution>

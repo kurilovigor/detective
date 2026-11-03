@@ -1,4 +1,4 @@
-﻿using Detective.Configuration;
+using Detective.Configuration;
 using Detective.Database;
 using Detective.Database.Entities;
 using Detective.ViewModels;
@@ -14,6 +14,7 @@ namespace Detective.Views.Pages
     public partial class LabelEditPage : Page
     {
         private readonly DetectionDatabase detectionDatabase;
+        public DetectionDatabase DetectionDatabase => detectionDatabase;
         private FileItem? currentFileItem;
 
         public event EventHandler<CurrentFileItemChangedEventArgs>? CurrentFileItemChanged;
@@ -207,7 +208,7 @@ namespace Detective.Views.Pages
             }
         }
 
-        private void SaveCurrentFileItem()
+        public void SaveCurrentFileItem()
         {
             if (CurrentFileItem != null)
             {

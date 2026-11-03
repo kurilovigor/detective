@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using Detective.Configuration;
 using Detective.Database;
 using Detective.Views.Pages;
+using Detective.Yolo.Export;
 
 namespace Detective.ViewModels
 {
@@ -146,9 +147,48 @@ namespace Detective.ViewModels
             }
         }
 
-        private void ExportToYolo()
+        private DetectionDatabase? _currentDatabase;
+        public DetectionDatabase? CurrentDatabase
         {
-            // TODO: implement YOLO export
+            get => (CurrentPage as LabelEditPage)?.DetectionDatabase ?? _currentDatabase;
+            set => _currentDatabase = value;
+        }
+
+        public void ExportToYolo(string? destinationFilePath)
+        {
+            var page = CurrentPage as LabelEditPage;
+            page?.SaveCurrentFileItem();
+
+            var database = CurrentDatabase;
+            if (database == null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(destinationFilePath))
+            {
+                var dlg = new Microsoft.Win32.SaveFileDialog
+                {
+                    FileName = "data.yml",
+                    DefaultExt = ".yml",
+                    Filter = "YAML files (*.yml)|*.yml|All files (*.*)|*.*"
+                };
+
+                if (dlg.ShowDialog() != true)
+                {
+                    return;
+                }
+
+                destinationFilePath = dlg.FileName;
+            }
+
+            var exporter = new YoloExporter();
+            exporter.Export(database, destinationFilePath);
+        }
+
+        public void ExportToYolo()
+        {
+            ExportToYolo(null);
         }
 
         private void Settings()
