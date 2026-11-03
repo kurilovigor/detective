@@ -490,6 +490,9 @@ $RECYCLE.BIN/
 *.litedb
 
 /.claude
-/.github
 /.repowise
 /.vscode
+
+
+# Distribution output
+dist/
